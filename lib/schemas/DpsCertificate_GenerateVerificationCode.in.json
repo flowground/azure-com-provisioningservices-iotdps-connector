@@ -1,0 +1,68 @@
+{
+    "type": "object",
+    "properties": {
+        "certificateName": {
+            "required": true,
+            "type": "string"
+        },
+        "subscriptionId": {
+            "required": true,
+            "type": "string"
+        },
+        "resourceGroupName": {
+            "required": true,
+            "type": "string"
+        },
+        "provisioningServiceName": {
+            "required": true,
+            "type": "string"
+        },
+        "If_Match": {
+            "required": true,
+            "type": "string"
+        },
+        "certificate_name": {
+            "required": false,
+            "type": "string"
+        },
+        "certificate_rawBytes": {
+            "required": false,
+            "type": "string",
+            "format": "byte"
+        },
+        "certificate_isVerified": {
+            "required": false,
+            "type": "boolean"
+        },
+        "certificate_purpose": {
+            "required": false,
+            "type": "string",
+            "enum": [
+                "clientAuthentication",
+                "serverAuthentication"
+            ]
+        },
+        "certificate_created": {
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+        },
+        "certificate_lastUpdated": {
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+        },
+        "certificate_hasPrivateKey": {
+            "required": false,
+            "type": "boolean"
+        },
+        "certificate_nonce": {
+            "required": false,
+            "type": "string"
+        },
+        "api_version": {
+            "required": true,
+            "type": "string"
+        }
+    }
+}

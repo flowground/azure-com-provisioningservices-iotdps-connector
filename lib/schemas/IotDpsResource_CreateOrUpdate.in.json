@@ -1,0 +1,239 @@
+{
+    "type": "object",
+    "properties": {
+        "subscriptionId": {
+            "required": true,
+            "type": "string"
+        },
+        "resourceGroupName": {
+            "required": true,
+            "type": "string"
+        },
+        "provisioningServiceName": {
+            "required": true,
+            "type": "string"
+        },
+        "requestBody": {
+            "allOf": [
+                {
+                    "description": "The common properties of an Azure resource.",
+                    "properties": {
+                        "id": {
+                            "description": "The resource identifier.",
+                            "readOnly": true,
+                            "type": "string"
+                        },
+                        "location": {
+                            "description": "The resource location.",
+                            "type": "string"
+                        },
+                        "name": {
+                            "description": "The resource name.",
+                            "pattern": "^(?![0-9]+$)(?!-)[a-zA-Z0-9-]{2,49}[a-zA-Z0-9]$",
+                            "readOnly": true,
+                            "type": "string"
+                        },
+                        "tags": {
+                            "additionalProperties": {
+                                "type": "string"
+                            },
+                            "description": "The resource tags.",
+                            "type": "object"
+                        },
+                        "type": {
+                            "description": "The resource type.",
+                            "readOnly": true,
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "location"
+                    ],
+                    "x-ms-azure-resource": true,
+                    "type": "object"
+                }
+            ],
+            "description": "The description of the provisioning service.",
+            "properties": {
+                "etag": {
+                    "description": "The Etag field is *not* required. If it is provided in the response body, it must also be provided as a header per the normal ETag convention.",
+                    "type": "string"
+                },
+                "properties": {
+                    "description": "Service specific properties for a provisioning service",
+                    "properties": {
+                        "allocationPolicy": {
+                            "description": "Allocation policy to be used by this provisioning service.",
+                            "enum": [
+                                "Hashed",
+                                "GeoLatency",
+                                "Static"
+                            ],
+                            "type": "string",
+                            "x-ms-enum": {
+                                "modelAsString": true,
+                                "name": "AllocationPolicy"
+                            }
+                        },
+                        "authorizationPolicies": {
+                            "description": "List of authorization keys for a provisioning service.",
+                            "items": {
+                                "description": "Description of the shared access key.",
+                                "properties": {
+                                    "keyName": {
+                                        "description": "Name of the key.",
+                                        "type": "string"
+                                    },
+                                    "primaryKey": {
+                                        "description": "Primary SAS key value.",
+                                        "type": "string"
+                                    },
+                                    "rights": {
+                                        "description": "Rights that this key has.",
+                                        "enum": [
+                                            "ServiceConfig",
+                                            "EnrollmentRead",
+                                            "EnrollmentWrite",
+                                            "DeviceConnect",
+                                            "RegistrationStatusRead",
+                                            "RegistrationStatusWrite"
+                                        ],
+                                        "type": "string",
+                                        "x-ms-enum": {
+                                            "modelAsString": true,
+                                            "name": "AccessRightsDescription"
+                                        }
+                                    },
+                                    "secondaryKey": {
+                                        "description": "Secondary SAS key value.",
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                    "keyName",
+                                    "rights"
+                                ],
+                                "type": "object"
+                            },
+                            "type": "array"
+                        },
+                        "deviceProvisioningHostName": {
+                            "description": "Device endpoint for this provisioning service.",
+                            "readOnly": true,
+                            "type": "string"
+                        },
+                        "idScope": {
+                            "description": "Unique identifier of this provisioning service.",
+                            "readOnly": true,
+                            "type": "string"
+                        },
+                        "iotHubs": {
+                            "description": "List of IoT hubs assosciated with this provisioning service.",
+                            "items": {
+                                "description": "Description of the IoT hub.",
+                                "properties": {
+                                    "allocationWeight": {
+                                        "description": "weight to apply for a given iot h.",
+                                        "format": "int32",
+                                        "type": "integer"
+                                    },
+                                    "applyAllocationPolicy": {
+                                        "description": "flag for applying allocationPolicy or not for a given iot hub.",
+                                        "type": "boolean"
+                                    },
+                                    "connectionString": {
+                                        "description": "Connection string og the IoT hub.",
+                                        "type": "string"
+                                    },
+                                    "location": {
+                                        "description": "ARM region of the IoT hub.",
+                                        "type": "string"
+                                    },
+                                    "name": {
+                                        "description": "Host name of the IoT hub.",
+                                        "readOnly": true,
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                    "connectionString",
+                                    "location"
+                                ],
+                                "type": "object"
+                            },
+                            "type": "array"
+                        },
+                        "provisioningState": {
+                            "description": "The ARM provisioning state of the provisioning service.",
+                            "type": "string"
+                        },
+                        "serviceOperationsHostName": {
+                            "description": "Service endpoint for provisioning service.",
+                            "readOnly": true,
+                            "type": "string"
+                        },
+                        "state": {
+                            "description": "Current state of the provisioning service.",
+                            "enum": [
+                                "Activating",
+                                "Active",
+                                "Deleting",
+                                "Deleted",
+                                "ActivationFailed",
+                                "DeletionFailed",
+                                "Transitioning",
+                                "Suspending",
+                                "Suspended",
+                                "Resuming",
+                                "FailingOver",
+                                "FailoverFailed"
+                            ],
+                            "type": "string",
+                            "x-ms-enum": {
+                                "modelAsString": true,
+                                "name": "state"
+                            }
+                        }
+                    },
+                    "type": "object"
+                },
+                "sku": {
+                    "description": "Sku info for a provisioning Service.",
+                    "properties": {
+                        "capacity": {
+                            "description": "The number of units to provision",
+                            "format": "int64",
+                            "type": "integer"
+                        },
+                        "name": {
+                            "description": "Sku name.",
+                            "enum": [
+                                "S1"
+                            ],
+                            "type": "string",
+                            "x-ms-enum": {
+                                "modelAsString": true,
+                                "name": "IotDpsSku"
+                            }
+                        },
+                        "tier": {
+                            "description": "Pricing tier name of the provisioning service.",
+                            "readOnly": true,
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                }
+            },
+            "required": [
+                "sku",
+                "properties"
+            ],
+            "type": "object"
+        },
+        "api_version": {
+            "required": true,
+            "type": "string"
+        }
+    }
+}

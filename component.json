@@ -1,0 +1,356 @@
+{
+    "title": "iotDpsClient",
+    "description": "API for using the Azure IoT Hub Device Provisioning Service features.",
+    "docsUrl": "",
+    "url": "https://api.apis.guru/v2/specs/azure.com/provisioningservices-iotdps/2017-11-15/swagger.json",
+    "envVars": {
+        "OAUTH_CLIENT_ID": {
+            "description": "OAuth Client ID"
+        },
+        "OAUTH_CLIENT_SECRET": {
+            "description": "OAuth Client Secret"
+        }
+    },
+    "credentials": {
+        "fields": {
+            "server": {
+                "label": "Server",
+                "viewClass": "SelectView",
+                "model": [
+                    "https://management.azure.com/",
+                    "--- Custom URL"
+                ],
+                "required": true
+            },
+            "otherServer": {
+                "label": "Custom Server URL",
+                "viewClass": "TextFieldView"
+            },
+            "azure_auth": {
+                "label": "Azure Active Directory OAuth2 Flow.",
+                "viewClass": "OAuthFieldView"
+            }
+        },
+        "oauth2": {
+            "client_id": "{{OAUTH_CLIENT_ID}}",
+            "client_secret": "{{OAUTH_CLIENT_SECRET}}",
+            "auth_uri": "https://login.microsoftonline.com/common/oauth2/authorize"
+        }
+    },
+    "triggers": {
+        "startFlow": {
+            "main": "./lib/triggers/startFlow.js",
+            "type": "polling",
+            "title": "Start Flow",
+            "fields": {}
+        }
+    },
+    "actions": {
+        "Operations_List": {
+            "main": "./lib/actions/Operations_List.js",
+            "title": "Lists all of the available Microsoft.Devices REST API operations.",
+            "description": "Lists all of the available Microsoft.Devices REST API operations.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Operations_List.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "IotDpsResource_CheckProvisioningServiceNameAvailability": {
+            "main": "./lib/actions/IotDpsResource_CheckProvisioningServiceNameAvailability.js",
+            "title": "Check if a provisioning service name is available.",
+            "description": "Check if a provisioning service name is available. This will validate if the name is syntactically valid and if the name is usable",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/IotDpsResource_CheckProvisioningServiceNameAvailability.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "IotDpsResource_ListBySubscription": {
+            "main": "./lib/actions/IotDpsResource_ListBySubscription.js",
+            "title": "Get all the provisioning services in a subscription.",
+            "description": "List all the provisioning services for a given subscription id.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/IotDpsResource_ListBySubscription.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "IotDpsResource_ListByResourceGroup": {
+            "main": "./lib/actions/IotDpsResource_ListByResourceGroup.js",
+            "title": "Get a list of all provisioning services in the given resource group.",
+            "description": "Get a list of all provisioning services in the given resource group.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/IotDpsResource_ListByResourceGroup.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "IotDpsResource_Delete": {
+            "main": "./lib/actions/IotDpsResource_Delete.js",
+            "title": "Delete the Provisioning Service",
+            "description": "Deletes the Provisioning Service.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/IotDpsResource_Delete.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "IotDpsResource_Get": {
+            "main": "./lib/actions/IotDpsResource_Get.js",
+            "title": "Get the non-security related metadata of the provisioning service.",
+            "description": "Get the metadata of the provisioning service without SAS keys.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/IotDpsResource_Get.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "IotDpsResource_Update": {
+            "main": "./lib/actions/IotDpsResource_Update.js",
+            "title": "Update an existing provisioning service's tags.",
+            "description": "Update an existing provisioning service's tags. to update other fields use the CreateOrUpdate method",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/IotDpsResource_Update.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "IotDpsResource_CreateOrUpdate": {
+            "main": "./lib/actions/IotDpsResource_CreateOrUpdate.js",
+            "title": "Create or update the metadata of the provisioning service.",
+            "description": "Create or update the metadata of the provisioning service. The usual pattern to modify a property is to retrieve the provisioning service metadata and security metadata, and then combine them with the modified values in a new body to update the provisioning service.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/IotDpsResource_CreateOrUpdate.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "DpsCertificates_List": {
+            "main": "./lib/actions/DpsCertificates_List.js",
+            "title": "Get all the certificates tied to the provisioning service.",
+            "description": "Get all the certificates tied to the provisioning service.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/DpsCertificates_List.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "DpsCertificate_Delete": {
+            "main": "./lib/actions/DpsCertificate_Delete.js",
+            "title": "Delete the Provisioning Service Certificate.",
+            "description": "Deletes the specified certificate assosciated with the Provisioning Service",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/DpsCertificate_Delete.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "DpsCertificate_Get": {
+            "main": "./lib/actions/DpsCertificate_Get.js",
+            "title": "Get the certificate from the provisioning service.",
+            "description": "Get the certificate from the provisioning service.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/DpsCertificate_Get.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "DpsCertificate_CreateOrUpdate": {
+            "main": "./lib/actions/DpsCertificate_CreateOrUpdate.js",
+            "title": "Upload the certificate to the provisioning service.",
+            "description": "Add new certificate or update an existing certificate.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/DpsCertificate_CreateOrUpdate.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "DpsCertificate_GenerateVerificationCode": {
+            "main": "./lib/actions/DpsCertificate_GenerateVerificationCode.js",
+            "title": "Generate verification code for Proof of Possession.",
+            "description": "Generate verification code for Proof of Possession.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/DpsCertificate_GenerateVerificationCode.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "DpsCertificate_VerifyCertificate": {
+            "main": "./lib/actions/DpsCertificate_VerifyCertificate.js",
+            "title": "Verify certificate's private key possession.",
+            "description": "Verifies the certificate's private key possession by providing the leaf cert issued by the verifying pre uploaded certificate.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/DpsCertificate_VerifyCertificate.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "IotDpsResource_ListKeysForKeyName": {
+            "main": "./lib/actions/IotDpsResource_ListKeysForKeyName.js",
+            "title": "Get a shared access policy by name from a provisioning service.",
+            "description": "List primary and secondary keys for a specific key name",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/IotDpsResource_ListKeysForKeyName.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "IotDpsResource_ListKeys": {
+            "main": "./lib/actions/IotDpsResource_ListKeys.js",
+            "title": "Get the security metadata for a provisioning service.",
+            "description": "List the primary and secondary keys for a provisioning service.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/IotDpsResource_ListKeys.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "IotDpsResource_GetOperationResult": {
+            "main": "./lib/actions/IotDpsResource_GetOperationResult.js",
+            "title": "Gets the status of a long running operation, such as create, update or delete a provisioning service.",
+            "description": "Gets the status of a long running operation, such as create, update or delete a provisioning service.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/IotDpsResource_GetOperationResult.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "IotDpsResource_listValidSkus": {
+            "main": "./lib/actions/IotDpsResource_listValidSkus.js",
+            "title": "Get the list of valid SKUs for a provisioning service.",
+            "description": "Gets the list of valid SKUs and tiers for a provisioning service.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/IotDpsResource_listValidSkus.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        }
+    }
+}

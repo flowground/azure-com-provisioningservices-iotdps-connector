@@ -1,0 +1,40 @@
+{
+    "type": "object",
+    "properties": {
+        "subscriptionId": {
+            "required": true,
+            "type": "string"
+        },
+        "resourceGroupName": {
+            "required": true,
+            "type": "string"
+        },
+        "provisioningServiceName": {
+            "required": true,
+            "type": "string"
+        },
+        "certificateName": {
+            "required": true,
+            "type": "string",
+            "maxLength": 256
+        },
+        "requestBody": {
+            "description": "The JSON-serialized X509 Certificate.",
+            "properties": {
+                "certificate": {
+                    "description": "Base-64 representation of the X509 leaf certificate .cer file or just .pem file content.",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "api_version": {
+            "required": true,
+            "type": "string"
+        },
+        "If_Match": {
+            "required": false,
+            "type": "string"
+        }
+    }
+}

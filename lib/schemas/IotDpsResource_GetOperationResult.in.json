@@ -1,0 +1,30 @@
+{
+    "type": "object",
+    "properties": {
+        "operationId": {
+            "required": true,
+            "type": "string"
+        },
+        "subscriptionId": {
+            "required": true,
+            "type": "string"
+        },
+        "resourceGroupName": {
+            "required": true,
+            "type": "string"
+        },
+        "provisioningServiceName": {
+            "required": true,
+            "type": "string"
+        },
+        "asyncinfo": {
+            "required": true,
+            "type": "string",
+            "default": "true"
+        },
+        "api_version": {
+            "required": true,
+            "type": "string"
+        }
+    }
+}
